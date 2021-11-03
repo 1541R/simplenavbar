@@ -1,5 +1,7 @@
 import React from 'react';
 import Logo from '../img/logo.png';
+import CartWidget from './CartWidget';
+import ItemListContainer from './ItemListContainer';
 
 export default function NavBar() {
     
@@ -16,9 +18,7 @@ export default function NavBar() {
                         <li><a href="#">Pantalones</a></li>
                         <li><a href="#">Zapatos</a></li>
                     </ul>
-                    <a href="#" className="icon-cart">
-                        <i className="material-icons right">shopping_cart</i>
-                    </a>
+                    <CartWidget/>
                 </div>
             </nav>
             <ul className="sidenav" id="mobile-demo">
@@ -26,6 +26,7 @@ export default function NavBar() {
                 <li><a href="#">Pantalotens</a></li>
                 <li><a href="#">Zapatos</a></li>
             </ul>
+            <ItemListContainer/>
         </>
 
     )
