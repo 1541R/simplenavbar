@@ -17,3 +17,5 @@ nav.nav-center ul li a {
 }
 
 nav { background-color: #383838; }
+
+.card .card-action { display: flex; align-items: center; flex-wrap: nowrap; justify-content: space-between; }
