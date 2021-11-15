@@ -6,7 +6,7 @@ export default function ItemCount({ stock, initial }) {
     return (
         <>
             <button 
-                className="btn btn-outline-primary btn-sm mr-1"
+                className="btn btn-quantity btn-sm mr-1"
                 onClick={() =>{ 
                     stateCounter > initial &&
                     setstateCounter(stateCounter - 1)
@@ -18,7 +18,7 @@ export default function ItemCount({ stock, initial }) {
                 {stateCounter}
             </span>
             <button 
-                className="btn btn-outline-primary btn-sm mr-1"
+                className="btn btn-quantity btn-sm mr-1"
                 onClick={() =>{ 
                     stateCounter < stock &&
                     setstateCounter(stateCounter + 1)

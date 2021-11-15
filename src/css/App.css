@@ -1,0 +1,38 @@
+nav.nav-center ul {
+    text-align: center;
+}
+nav.nav-center ul li {
+    display: inline;
+    float: none;
+}
+nav.nav-center ul li a {
+    display: inline-block;
+}
+
+.icon-cart{
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  padding-right: 10px;
+}
+
+nav { background-color: #383838; }
+
+.card .card-action { display: flex; align-items: center; flex-wrap: nowrap; justify-content: space-between; padding: 10px 10px; }
+
+.card .card-image { min-height: 325px; max-height: 325px; overflow: hidden; }
+
+.card .card-title { height: 39px; display: block; text-align: center; font-size: 13px; }
+
+.btn-quantity { text-decoration: none; color: #fff; background-color: #383838; text-align: center; letter-spacing: .5px; transition: background-color .2s ease-out; cursor: pointer; }
+
+.btn-add { margin: 0 auto; }
+
+.space { margin-top: 2em; margin-bottom: 1em; }
+
+.mt-20 { margin-top: 20%; }
+
+.mt-30 { margin-top: 30%; }
+
+.progress { background-color: #383838; }
+.progress .indeterminate { background-color: #bfbfbf; }

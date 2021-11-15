@@ -1,20 +1,23 @@
-import ItemCount from './ItemCount';
+import Item from "./Item";
 
-export default function ItemListContainer() {
+export default function ItemListContainer({products}) {
     
     return (
         <div className="row container">
-            <h1>Item List Container</h1>
-
-            <div className="col s12 m3">
-                <div className="card">
-                    
-                    <span className="card-title">Camisa</span>
-                    <div className="card-action">
-                        <ItemCount stock={5} initial={1} />
-                    </div>
-                </div>
-            </div>
+            {
+                products && 
+                products.map( (product) => 
+                    <Item key={product.id} 
+                    title={product.title} 
+                    price={product.price} 
+                    description={product.description} 
+                    category={product.category} 
+                    image={product.image} 
+                    stock={product.stock} 
+                    />
+                 )
+            }
+            
         </div>
     )
 }
