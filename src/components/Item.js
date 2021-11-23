@@ -1,7 +1,8 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import ItemCount from './ItemCount';
 
-export default function Item({
+export default function Item({id,
     title,
     price,
     description,
@@ -18,16 +19,20 @@ export default function Item({
                 <span className="card-title">{title}</span>
                 <span className="card-title">$ {price}</span>
                 <div>
+                <div className="card-action col 12">
+                        <Link to={'/itemdetail/'+id}>
+                            <button className="btn btn-quantity btn-add">
+                                Ver detalle
+                            </button>
+                        </Link>
+                    </div>
                     <div className="card-action col m6">
-                        <ItemCount 
+                        {/* <ItemCount 
                             stock={stock} 
-                            initial={1} />
+                            initial={1} /> */}
+                        
                     </div>
-                    <div className="card-action col m6">
-                        <button className="btn btn-quantity btn-add">
-                            Agregar
-                        </button>
-                    </div>
+                    
                 </div>
                 <div className="row">
 

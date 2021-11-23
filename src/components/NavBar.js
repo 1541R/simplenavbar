@@ -1,62 +1,32 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Logo from '../img/logo.png';
 import CartWidget from './CartWidget';
-import ItemListContainer from './ItemListContainer';
-import { products } from "../data/products";
+import { Link } from 'react-router-dom';
 export default function NavBar() {
-
-    const [data, setData] = useState([]);
-
-    useEffect(() => {
-        const productos = (products) => {
-            return new Promise( (resolve, reject) => {
-                if(products.length){
-                    setTimeout(() => {
-                        resolve(products);
-                    }, 1500);
-                }else{
-                    reject([]);
-                }
-
-            } )
-        }
-        productos(products)
-        .then( response => setData(response) )
-        .catch( err => console.log(err) )
-    }, [data])
     
     return (
         <>
             <nav className="nav-extended nav-center">
                 <div className="nav-wrapper">
-                    <a href="#" className="brand-logo">
+                    <Link to="/" className="brand-logo">
                         <img src={Logo} width="110" />
-                    </a>
+                    </Link>
                     <a href="#" data-target="mobile-demo" className="sidenav-trigger"><i className="material-icons">menu</i></a>
                     <ul id="nav-mobile" className="hide-on-med-and-down">
-                        <li><a href="#">Playeras</a></li>
-                        <li><a href="#">Pantalones</a></li>
-                        <li><a href="#">Zapatos</a></li>
+                        <li><Link to="/">Home</Link></li>
+                        <li><Link to="/category/1">Mujeres</Link></li>
+                        <li><Link to="/category/2">Hombres</Link></li>
                     </ul>
                     <CartWidget/>
                 </div>
             </nav>
             <ul className="sidenav" id="mobile-demo">
-                <li><a href="#">Playeras</a></li>
-                <li><a href="#">Pantalotens</a></li>
-                <li><a href="#">Zapatos</a></li>
+                <li><Link to="/">Home</Link></li>
+                <li><Link to="/category/1">Mujeres</Link></li>
+                <li><Link to="/category/2">Hombres</Link></li>
             </ul>
             <div className="space"></div>
-            {
-                data.length ?
-                    <ItemListContainer products={data}/>
-                    :
-                    <div className="container mt-20">    
-                        <div className="progress">
-                            <div className="indeterminate"></div>
-                        </div>
-                    </div>
-            }
+           
             
         </>
 
