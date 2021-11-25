@@ -4,7 +4,7 @@ export default function ItemCount({ stock, initial }) {
     const [stateCounter, setstateCounter] = useState(initial);
 
     return (
-        <>
+        <div className="card-action col m12">
             <button 
                 className="btn btn-quantity btn-sm mr-1"
                 onClick={() =>{ 
@@ -26,6 +26,6 @@ export default function ItemCount({ stock, initial }) {
                 >
                 +
             </button>
-        </>
+        </div>
     )
 }

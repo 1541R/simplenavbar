@@ -1,34 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { products } from "../data/products";
+import { CustomFetch } from '../utils/CustomFetch';
+import ItemDetail from './ItemDetail';
 
 export default function ItemDetailContainer() {
 
-    const [Details, setDetails] = useState([]);
-    const {idItem} = useParams();
-    
-    useEffect(() => {
-        const productos = (productos) => {
-            return new Promise( (resolve, reject) => {
-                if(productos.length){
-                    setTimeout(() => {
-                        resolve(productos.filter( item => item.id === parseInt(idItem))
-                            );
-                    }, 1500);
-                }else{
-                    reject([]);
-                }
+    const [details, setDetails] = useState({});
+    const { idItem } = useParams();
 
-            } )
-        }
-        productos(products)
-        .then( response => setDetails(response) )
+    useEffect(() => {
+        
+        CustomFetch(products.find(item => item.id === parseInt(idItem)) , 2000)
+        .then( result => setDetails(result)  )
         .catch( err => console.log(err) )
-    }, [Details])
-    console.log(Details)
+
+    }, [idItem])
+    console.log( details );
     return (
-        <div>
-            {Details.join('')}
-        </div>
+        <ItemDetail data={details} />
     )
 }

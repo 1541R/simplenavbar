@@ -1,10 +1,11 @@
 import React from 'react'
 import Item from "./Item";
+import ProgressBar from './ProgressBar';
 export default function ItemList({data}) {
     return (
         <div className="row container">
             {   
-                data.length ?
+                data ?
                     data.map( (product) => 
                         <Item key={product.id} 
                         id={product.id} 
@@ -17,11 +18,7 @@ export default function ItemList({data}) {
                         />
                     )
                     :
-                    <div className="container mt-20">    
-                        <div className="progress">
-                            <div className="indeterminate"></div>
-                        </div>
-                    </div>
+                    <ProgressBar />
             }
             
         </div>

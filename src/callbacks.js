@@ -38,7 +38,7 @@ const products = [
       id: 29,
       name: "Agua Sin Gas 1,5 lts",
       stock: 100,
-      cost: 140,
+      cost: 45,
     },
     {
       id: 76,
@@ -48,19 +48,19 @@ const products = [
     }
 ]
 const estatus = true 
-const productos = (products) => {
+const productos = (products, timeout) => {
 
     return new Promise( (resolve, reject) => {
         if(estatus){
             setTimeout( () => {
                 resolve(products)
-            }, 3000 )
+            }, timeout )
         }else{
             reject("Error");
         }
     } );
 }
 
-productos(products)
+productos(products.filter( product => product.cost === 45 )  , 3000)
 .then( prods =>  { console.log(prods) }  )
 .catch( err => console.log(err) )

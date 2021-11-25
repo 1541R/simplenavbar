@@ -2,34 +2,26 @@ import React, { useEffect, useState }  from 'react';
 import { products } from "../data/products";
 import { useParams } from "react-router";
 import ItemList from "./ItemList";
+import { CustomFetch } from '../utils/CustomFetch';
 
 export default function ItemListContainer() {
     
-    const [data, setData] = useState([]);
+    const [Datos, setDatos] = useState([]);
     const { idCategory } = useParams();
-    
-    useEffect(() => {
-        const productos = (products) => {
-            return new Promise( (resolve, reject) => {
-                if(products.length){
-                    setTimeout( idCategory => {
-                        resolve(products.filter( item => {
-                            return (idCategory) ? item.category.id === parseInt(idCategory) : item;
-                        })
-                            );
-                    }, 1500);
-                }else{
-                    reject([]);
-                }
 
-            } )
-        }
-        productos(products)
-        .then( response => setData(response) )
+    useEffect(() => {
+        
+        CustomFetch(products.filter( item => {
+            if(idCategory === undefined) return item ;
+            return item.category.id === parseInt(idCategory) ;
+        }, 5000))
+        .then( result => setDatos(result)  )
         .catch( err => console.log(err) )
-    }, [data, idCategory])
-   console.log(data);
+
+    }, [idCategory])
+
+    //console.log(Datos);
     return (
-        <ItemList data={data} />
+        <ItemList data={Datos} />
     )
 }

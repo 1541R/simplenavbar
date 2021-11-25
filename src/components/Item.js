@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import ItemCount from './ItemCount';
 
 export default function Item({id,
     title,
@@ -26,12 +25,12 @@ export default function Item({id,
                             </button>
                         </Link>
                     </div>
-                    <div className="card-action col m6">
-                        {/* <ItemCount 
+                     {/*<div className="card-action col m6">
+                        <ItemCount 
                             stock={stock} 
-                            initial={1} /> */}
+                            initial={1} /> 
                         
-                    </div>
+                    </div>*/}
                     
                 </div>
                 <div className="row">
