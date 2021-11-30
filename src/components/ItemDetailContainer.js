@@ -16,7 +16,7 @@ export default function ItemDetailContainer() {
         .catch( err => console.log(err) )
 
     }, [idItem])
-    console.log( details );
+    //console.log( details );
     return (
         <ItemDetail data={details} />
     )

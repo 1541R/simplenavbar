@@ -1,11 +1,12 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function CartWidget() {
     return (
-        <>
-            <a href="#" className="icon-cart">
+        <Link to="/cart">
+            <label className="icon-cart">
                 <i className="material-icons right">shopping_cart</i><label>4</label>
-            </a>  
-        </>
+            </label>  
+        </Link>
     )
 }

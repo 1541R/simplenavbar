@@ -2,6 +2,7 @@ import React from 'react';
 import Logo from '../img/logo.png';
 import CartWidget from './CartWidget';
 import { Link } from 'react-router-dom';
+import SearchForm from './SearchForm';
 export default function NavBar() {
     
     return (
@@ -11,11 +12,12 @@ export default function NavBar() {
                     <Link to="/" className="brand-logo">
                         <img src={Logo} width="110" />
                     </Link>
-                    <a href="#" data-target="mobile-demo" className="sidenav-trigger"><i className="material-icons">menu</i></a>
+                    <label data-target="mobile-demo" className="sidenav-trigger"><i className="material-icons">menu</i></label>
                     <ul id="nav-mobile" className="hide-on-med-and-down">
                         <li><Link to="/">Home</Link></li>
                         <li><Link to="/category/1">Mujeres</Link></li>
                         <li><Link to="/category/2">Hombres</Link></li>
+                        <SearchForm />
                     </ul>
                     <CartWidget/>
                 </div>

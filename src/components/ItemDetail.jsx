@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
+import { CartContext } from './CartContext';
+import { Link } from 'react-router-dom';
 import ItemCount from './ItemCount'
 import ProgressBar from './ProgressBar'
 
@@ -7,6 +9,13 @@ export default function ItemDetail({data}) {
      * id title price description category image stock rating
      * 
      */
+    const [itemCount, setItemCount] = useState(0);
+    const test = useContext(CartContext);
+    const onAdd = (cantidad) => {
+        alert(`Has agregado ${cantidad} productos al carrito`);
+        setItemCount(cantidad);
+        test.addToCart(data, cantidad);
+    }
     return (
         <div>
             {
@@ -31,10 +40,18 @@ export default function ItemDetail({data}) {
                                     <i className="material-icons mr-3">favorite_border</i>
                                     Wishlist
                                 </span>
-                                <h5>{data.price}</h5>
-                                <ItemCount 
-                                stock={data.stock} 
-                                initial={1} /> 
+                                <h5>$ {data.price}</h5>
+                                {
+                                    itemCount === 0
+                                    ? <ItemCount 
+                                    stock={data.stock} 
+                                    initial={itemCount} onAdd={onAdd} /> 
+                                    : 
+                                    <Link to="/cart" style={{textDecoration: 'none'}}>
+                                        <button className="btn">Checkout</button>
+                                    </Link>
+                                }
+                                
                             </div>
                         </div>
                     </div>

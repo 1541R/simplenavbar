@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import { CartContext } from './CartContext';
 
-export default function ItemCount({ stock, initial }) {
+export default function ItemCount({ stock, initial, onAdd }) {
     const [stateCounter, setstateCounter] = useState(initial);
-
+    const test = useContext(CartContext);
+    console.log(test);
     return (
         <div className="card-action col m12">
             <button 
@@ -26,6 +28,17 @@ export default function ItemCount({ stock, initial }) {
                 >
                 +
             </button>
+            {
+                stateCounter > 0 &&
+                <button 
+                    className="btn"
+                    onClick={
+                        () => onAdd(stateCounter)
+                    }
+                >
+                    Agregar al carrito
+                </button>
+            }
         </div>
     )
 }
