@@ -5,22 +5,54 @@ const CartContextProvider = ({children}) => {
 
     const [cartList, setCartList] = useState([])
 
+    const [countItems, setCountItems] = useState([]);
+
     const addToCart = (item, cantidad) => {
-        setCartList([
-            ...cartList,
-            { 
-                idItem: item.id,
-                nameItem: item.title,
-                priceItem: item.price,
-                descriptionItem: item.description, 
-                imageItem: item.image,
-                quantityItem: cantidad
-            }
-        ]);
+        let count = 0;
+        let newCarlist = [];
+        if( cartList.find( product => product.idItem === item.id ) ){
+            newCarlist = cartList.map( product => {
+                if(product.idItem === item.id){
+                    product.quantityItem += cantidad;
+                    return product; 
+                }
+                return product;
+            } );
+            //console.log(newCarlist);
+            count = newCarlist.reduce(  (acc, obj) => acc + obj.quantityItem , 0 );
+            setCountItems(count)
+            setCartList(newCarlist)
+        }else{
+            newCarlist = [
+                ...cartList,
+                { 
+                    idItem: item.id,
+                    nameItem: item.title,
+                    priceItem: item.price,
+                    descriptionItem: item.description, 
+                    imageItem: item.image,
+                    quantityItem: cantidad
+                }
+            ]
+            setCartList(newCarlist);            
+            count = newCarlist.reduce(  (acc, obj) => acc + obj.quantityItem , 0 ) ;
+            setCountItems(count)
+        }
+
+    }
+
+    const deleteToCart = (id) => {
+        //console.log(id, cartList);
+        let count = 0;
+        const result = cartList.filter( item => item.idItem !== id );
+        //console.log(result);
+        count = result.reduce(  (acc, obj) => acc + obj.quantityItem , 0 ) ;
+        setCountItems(count)
+        setCartList(result);
     }
 
     return (
-        <CartContext.Provider value={{cartList, addToCart}}>
+        <CartContext.Provider value={{cartList, addToCart, deleteToCart, countItems}}>
             {children}
         </CartContext.Provider>
     )

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import { products } from "../data/products";
-import { CustomFetch } from '../utils/CustomFetch';
+import { fireStoreDoc } from '../utils/fireStoreFetch';
 import ItemDetail from './ItemDetail';
 
 export default function ItemDetailContainer() {
@@ -11,9 +10,14 @@ export default function ItemDetailContainer() {
 
     useEffect(() => {
         
-        CustomFetch(products.find(item => item.id === parseInt(idItem)) , 2000)
+        /*CustomFetch(products.find(item => item.id === parseInt(idItem)) , 2000)
         .then( result => setDetails(result)  )
-        .catch( err => console.log(err) )
+        .catch( err => console.log(err) ) */
+
+        fireStoreDoc(idItem)
+            .then( result => setDetails(result) )
+            .catch( err => console.log(err) );
+
 
     }, [idItem])
     //console.log( details );

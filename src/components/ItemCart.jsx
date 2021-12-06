@@ -20,13 +20,23 @@ const pItem = {
 const right_text = {
     textAlign: 'right'
 }
-export default function ItemCart({item}) {
+export default function ItemCart({item, cartcontext}) {
+
+
+    const onDelete = (id) => {
+        alert(`Has eliminado un productos del carrito`);
+        cartcontext.deleteToCart(id);
+    }
     
     return (
         /** idItem nameItem priceItem descriptionItem imageItem quantityItem */
         <tr>
             <td>
-                <button className="btn"><i className="material-icons">delete</i></button>
+                <button className="btn"
+                    onClick={ () => onDelete(item.idItem)}
+                    >
+                    <i className="material-icons">delete</i>
+                </button>
             </td>
             <td>
                 <img src={item.imageItem} alt={item.nameItem} style={imgItem} />

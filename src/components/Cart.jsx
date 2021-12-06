@@ -9,6 +9,7 @@ export default function Cart() {
 
     const cartcontext = useContext(CartContext);
     const items = cartcontext.cartList;
+
     let total = 0;
     return (
         <div className="container">
@@ -31,7 +32,7 @@ export default function Cart() {
                             
                                 items.map( (item)=>{
                                     total += item.quantityItem * item.priceItem;
-                                    return <ItemCart key={item.idItem} item={item} />
+                                    return <ItemCart key={item.idItem} item={item} cartcontext={cartcontext}  />
                                 })
                             
                             

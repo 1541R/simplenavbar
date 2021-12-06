@@ -1,10 +1,9 @@
-import React, { useContext, useState } from 'react'
-import { CartContext } from './CartContext';
+import React, { useState } from 'react'
+
 
 export default function ItemCount({ stock, initial, onAdd }) {
     const [stateCounter, setstateCounter] = useState(initial);
-    const test = useContext(CartContext);
-    console.log(test);
+
     return (
         <div className="card-action col m12">
             <button 
