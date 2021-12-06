@@ -22,6 +22,14 @@ export default function ItemDetailContainer() {
     }, [idItem])
     //console.log( details );
     return (
-        <ItemDetail data={details} />
+        <>
+        {
+            details ?
+                <ItemDetail data={details} />
+                :
+                <h3>No existe el producto</h3>
+            
+        }
+        </>
     )
 }
