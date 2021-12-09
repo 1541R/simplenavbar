@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import CurrencyFromat from '../utils/CurrencyFromat';
 import { CartContext } from './CartContext';
 import ItemCart from './ItemCart';
+import { fireStoreOrder, fireStoreStock } from '../utils/fireStoreFetch';
 const right_text = {
     textAlign: 'right'
 }
@@ -10,7 +11,43 @@ export default function Cart() {
     const cartcontext = useContext(CartContext);
     const items = cartcontext.cartList;
 
-    let total = 0;
+    const total = cartcontext.getTotal();
+    const createOrder = () => {
+
+        const newItems = items.map( item => (
+            { 
+                id : item.idItem,
+                title: item.nameItem,
+                price: item.priceItem,
+                quantity: item.quantityItem
+            }
+        ) )
+
+        let order = { "buyer":"Isai Rodriguez",
+                      "email":"isai.rdz.a@gmail.com",
+                      "phone":"555555500",
+                      "items": newItems,
+                      "total": total
+                    }
+        
+        
+
+        fireStoreOrder(order)
+        .then(
+           result => {
+               items.forEach( item => { 
+                   console.log(item);
+                   fireStoreStock(item) 
+                } );
+               alert(`Gracias ${order.buyer} por tu compra, tu código de pedido es ${result.id}`); cartcontext.deleteCart();
+            }
+        )
+        .catch( err => console.log(err) );
+
+
+
+    }
+
     return (
         <div className="container">
             <table>
@@ -31,7 +68,6 @@ export default function Cart() {
                         items.length ?
                             
                                 items.map( (item)=>{
-                                    total += item.quantityItem * item.priceItem;
                                     return <ItemCart key={item.idItem} item={item} cartcontext={cartcontext}  />
                                 })
                             
@@ -43,8 +79,17 @@ export default function Cart() {
                     {
                         items.length && <tr><td colSpan="6" style={right_text}>{ CurrencyFromat(total)}</td></tr>
                     }
+                    
                 </tbody>
             </table>
+            {
+                items.length && 
+                <div style={ {textAlign: 'right', marginTop: '10px'} }>
+                    <button className="btn" 
+                        onClick={createOrder}
+                    >Checkout</button>
+                </div>
+            }
         </div>
     )
 }
